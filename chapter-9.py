@@ -66,4 +66,40 @@ def find_words_with_only(filename, letters):
 
 find_words_with_only('words.txt', 'acefhlo')
 
+# Exercise 9.5
+def uses_all(word, required):
+    for letter in required:
+        if letter not in word:
+            return False
+    return True
 
+def count_words_with_all_vowels(filename, required):
+    count = 0
+
+    with open(filename, 'r') as file:
+        for word in file:
+            word = word.strip()
+            if uses_all(word, required):
+                count += 1
+
+    print(f"Number of words containing all '{required}': {count}")
+
+count_words_with_all_vowels('words.txt', 'aeiou')
+count_words_with_all_vowels('words.txt', 'aeiouy')
+
+# Exercise 9.6
+def is_abecedarian(word):
+    return word == "".join(sorted(word))
+
+def count_abecedarian_words(filename):
+    count = 0
+
+    with open(filename, 'r') as file:
+        for word in file:
+            word = word.strip()
+            if is_abecedarian(word):
+                count += 1
+
+    print(f"Number of abecedarian words: {count}")
+
+count_abecedarian_words('words.txt')
